@@ -1,0 +1,2 @@
+echo "[husky][pre-push] starting..."
+yarn test:push
