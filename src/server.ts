@@ -1,10 +1,20 @@
 import express from "express"
-import { Request, Response } from "express"
-import start from "./index"
+import { router } from "./routes"
+
 const app = express()
 
-app.get("/", (request: Request, response: Response) => {
-  response.send(start())
+require("./database") // enable sequelize to server
+
+app.use(express.json())
+app.use(router)
+
+const port = process.env.PORT || 3000
+
+const server = app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`)
 })
 
-app.listen(3000, () => console.log("Listening on port 3000!"))
+process.on("SIGINT", () => {
+  server.close()
+  console.log("Server stopped")
+})
