@@ -1,8 +1,8 @@
 import { FarmerEntity } from "../../entities/FarmerEntity"
 import { IFarmerRepository } from "../IFarmerRepository"
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import Farmer = require("../../database/models/Farmer")
+
+// eslint-disable-next-line
+const Farmer = require('../../models/Farmer.js')
 
 export class PostgresFarmerRepository implements IFarmerRepository {
   async insert(farmer: FarmerEntity): Promise<FarmerEntity> {

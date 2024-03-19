@@ -2,7 +2,7 @@ import { AddressEntity } from "../../entities/AddressEntity"
 import { IAddressRepository } from "../IAddressRepository"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const Address = require("../../database/models/Address")
+const Address = require("../../models/Address")
 
 export class PostgresAddressRepository implements IAddressRepository {
   async insert(address: AddressEntity): Promise<AddressEntity> {

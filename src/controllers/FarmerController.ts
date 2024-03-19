@@ -5,7 +5,7 @@ import { cnpj as CNPJValidator, cpf as CPFValidator } from "cpf-cnpj-validator"
 import { IFarmerDTO } from "../useCases/FarmersUseCases/IFarmerDTO"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const Farmer = require("../database/models/Farmer")
+const Farmer = require("../models/Farmer")
 
 const isFarmerValid = (body: IFarmerDTO) => {
   const { name, cpf, cnpj } = body

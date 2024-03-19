@@ -1,9 +1,9 @@
 const Sequelize = require("sequelize")
 const dbConfig = require("./config")
 //
-const Farmer = require("./models/Farmer")
-const Farm = require("./models/Farm")
-const Address = require("./models/Address")
+const Farmer = require("../models/Farmer")
+const Farm = require("../models/Farm")
+const Address = require("../models/Address")
 // const Crop = require('../models/Crop');
 
 const connection = new Sequelize(dbConfig)

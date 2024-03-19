@@ -2,7 +2,7 @@ import { IFarmRepository } from "../IFarmRepository"
 import { FarmEntity } from "../../entities/FarmEntity"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const Farm = require("../../database/models/Farm")
+const Farm = require("../../models/Farm")
 
 export class PostgresFarmRepository implements IFarmRepository {
   async insert(farm: FarmEntity): Promise<FarmEntity> {

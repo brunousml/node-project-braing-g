@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const Address = require("../database/models/Address")
+const Address = require("../models/Address")
 
 const AddressController = {
   async list(request: Request, response: Response): Promise<object> {
