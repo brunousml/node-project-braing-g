@@ -8,7 +8,7 @@ export class CreateFarmController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const farm: FarmEntity = await this.createFarmUseCase.execute(
-        request.body,
+        request.body
       )
       return response.status(201).send(farm)
     } catch (error: unknown) {

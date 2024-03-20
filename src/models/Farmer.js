@@ -25,6 +25,10 @@ class Farmer extends Model {
       },
     )
   }
+
+  static associate(models) {
+    this.hasMany(models.Farm, { foreignKey: 'farmer_id', as: 'farms' })
+  }
 }
 
 module.exports = Farmer

@@ -11,7 +11,9 @@ const FarmAttributeInput = {
   name: faker.word.noun(),
   totalArea: 100,
   arableArea: 70,
-  vegetationArea: 30
+  vegetationArea: 30,
+  farmer_id: faker.string.uuid(),
+  address_id: faker.string.uuid()
 }
 describe('PostgresFarmRepository', () => {
   beforeEach(() => {
@@ -33,6 +35,8 @@ describe('PostgresFarmRepository', () => {
     expect(insertedFarm.totalArea).toBe(createdFarm.totalArea);
     expect(insertedFarm.arableArea).toBe(createdFarm.arableArea);
     expect(insertedFarm.vegetationArea).toBe(createdFarm.vegetationArea);
+    expect(insertedFarm.farmer_id).toBe(createdFarm.farmer_id);
+    expect(insertedFarm.address_id).toBe(createdFarm.address_id);
 
     expect(Farm.create).toHaveBeenCalledTimes(1);
     expect(Farm.create).toHaveBeenCalledWith(createdFarm);
@@ -58,6 +62,8 @@ describe('PostgresFarmRepository', () => {
       totalArea: 100,
       vegetationArea: 50,
       arableArea:  50,
+      farmer_id: faker.string.uuid(),
+      address_id: faker.string.uuid()
     }, objectId);
 
     // Act
@@ -69,6 +75,8 @@ describe('PostgresFarmRepository', () => {
     expect(result.vegetationArea).toBe(toUpdateFarmEntity.vegetationArea);
     expect(result.totalArea).toBe(toUpdateFarmEntity.totalArea);
     expect(result.arableArea).toBe(toUpdateFarmEntity.arableArea);
+    expect(result.farmer_id).toBe(toUpdateFarmEntity.farmer_id);
+    expect(result.address_id).toBe(toUpdateFarmEntity.address_id);
 
     // assert sequelize steps to update
     expect(Farm.findByPk).toHaveBeenCalledTimes(1);
@@ -99,10 +107,10 @@ describe('PostgresFarmRepository', () => {
   });
 
   it.each([
-    [{ name: 'atalia farm', totalArea: 100, arableArea: 70, vegetationArea: 0 }, 'vegetationArea is required.'],
-    [{ name: '', totalArea: 100, arableArea: 70, vegetationArea: 30 }, 'name is required.'],
-    [{ name: 'sunrise farm', totalArea: -50, arableArea: 70, vegetationArea: 30 }, 'Missing required fields: arableArea plus vegetationArea needs to be less or equal total area'],
-    [{ name: 'green acres', totalArea: 100, arableArea: 100, vegetationArea: 30 }, 'Missing required fields: arableArea plus vegetationArea needs to be less or equal total area'],
+    [{ name: 'atalia farm', totalArea: 100, arableArea: 70, vegetationArea: 0, farmer_id: 'abc', address_id: 'cba' }, 'vegetationArea is required.'],
+    [{ name: '', totalArea: 100, arableArea: 70, vegetationArea: 30, farmer_id: 'abc', address_id: 'cba' }, 'name is required.'],
+    [{ name: 'sunrise farm', totalArea: -50, arableArea: 70, vegetationArea: 30, farmer_id: 'abc', address_id: 'cba' }, 'Missing required fields: arableArea plus vegetationArea needs to be less or equal total area'],
+    [{ name: 'green acres', totalArea: 100, arableArea: 100, vegetationArea: 30, farmer_id: 'abc', address_id: 'cba' }, 'Missing required fields: arableArea plus vegetationArea needs to be less or equal total area'],
   ])(
     'should throw an error when inserting an Farm entity with missing or invalid fields: %s',
     async (input, expectedErrorMessage)  => {

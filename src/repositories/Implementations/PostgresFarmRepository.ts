@@ -5,14 +5,14 @@ import { FarmEntity } from "../../entities/FarmEntity"
 const Farm = require("../../models/Farm")
 
 export class PostgresFarmRepository implements IFarmRepository {
-  async insert(farm: FarmEntity): Promise<FarmEntity> {
-    const validationResult = farm.isValid()
+  async insert(farmEntity: FarmEntity): Promise<FarmEntity> {
+    const validationResult = farmEntity.isValid()
     if (!validationResult.valid)
       throw new Error(
         `Missing required fields: ${validationResult.errors.join()}`,
       )
 
-    return await Farm.create(farm)
+    return await Farm.create(farmEntity)
   }
 
   async update(id: string, farmEntity: FarmEntity): Promise<FarmEntity> {
@@ -22,9 +22,9 @@ export class PostgresFarmRepository implements IFarmRepository {
 
     // Set new values from request
     origin.set(farmEntity)
-    const { name, totalArea, arableArea, vegetationArea } = origin
+    const { name, totalArea, arableArea, vegetationArea, farmer_id, address_id } = origin
     const newFarm: FarmEntity = new FarmEntity(
-      { name, totalArea, arableArea, vegetationArea },
+      { name, totalArea, arableArea, vegetationArea, farmer_id, address_id},
       id,
     )
 

@@ -6,6 +6,8 @@ import { IFarmerDTO } from "../useCases/FarmersUseCases/IFarmerDTO"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Farmer = require("../models/Farmer")
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Farm = require("../models/Farm")
 
 const isFarmerValid = (body: IFarmerDTO) => {
   const { name, cpf, cnpj } = body
@@ -18,6 +20,17 @@ const isFarmerValid = (body: IFarmerDTO) => {
 }
 
 const FarmerController: IController = {
+  async list(request: Request, response: Response): Promise<object> {
+    const farmers = await Farmer.findAll({
+      include: [{
+        model: Farm,
+        as: `farms`
+      }]
+    });
+
+    return response.send(farmers)
+  },
+
   async delete(request: Request, response: Response): Promise<object> {
     const { farmer_id } = request.params
 
@@ -44,11 +57,6 @@ const FarmerController: IController = {
     } catch (error) {
       return response.status(500).send(error)
     }
-  },
-
-  async list(request: Request, response: Response): Promise<object> {
-    const farmers = await Farmer.findAll()
-    return response.send(farmers)
   },
 
   async create(request: Request, response: Response): Promise<object> {

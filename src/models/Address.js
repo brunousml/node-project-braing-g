@@ -21,7 +21,7 @@ class Address extends Model {
   }
 
   static associate(models) {
-    // this.hasMany(models.Farm, { foreignKey: 'address_id', as: 'farms' })
+    this.hasMany(models.Farm, { foreignKey: 'address_id', as: 'farms' })
   }
 }
 

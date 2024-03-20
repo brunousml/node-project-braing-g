@@ -8,6 +8,8 @@ export class FarmEntity {
   public totalArea: number | undefined
   public arableArea: number | undefined
   public vegetationArea: number | undefined
+  public farmer_id: string | undefined
+  public address_id: string | undefined
 
   constructor(props: Omit<IFarmDTO, "id">, id?: string) {
     Object.assign(this, props)
@@ -20,7 +22,7 @@ export class FarmEntity {
   isValid(): { valid: boolean; errors: string[] } {
     const errors: string[] = []
     // Required
-    if (!this.name) errors.push("farmName is required.")
+    if (!this.name) errors.push("name is required.")
     if (!this.totalArea) errors.push("totalArea is required.")
     if (!this.arableArea) errors.push("arableArea is required.")
     if (!this.vegetationArea) errors.push("vegetationArea is required.")

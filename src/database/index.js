@@ -13,6 +13,7 @@ Farm.init(connection)
 Address.init(connection)
 // Crop.init(connection);
 
+Farmer.associate(connection.models)
 Farm.associate(connection.models)
 Address.associate(connection.models)
 // Crop.associate(connection.models);

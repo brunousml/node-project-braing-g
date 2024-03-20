@@ -6,7 +6,7 @@ export class CreateFarmUseCase {
   constructor(private farmRepository: IFarmRepository) {}
 
   async execute(farmDto: IFarmDTO): Promise<FarmEntity> {
-    const newFarm = new FarmEntity(farmDto)
+    const newFarm:FarmEntity = new FarmEntity(farmDto)
 
     return await this.farmRepository.insert(newFarm)
   }
