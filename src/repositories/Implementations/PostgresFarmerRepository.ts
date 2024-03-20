@@ -15,22 +15,25 @@ export class PostgresFarmerRepository implements IFarmerRepository {
     return await Farmer.create(farmer)
   }
 
-  async update(id: string, farmer: FarmerEntity): Promise<FarmerEntity> {
+  async update(id: string, farmerEntity: FarmerEntity): Promise<FarmerEntity> {
+    // Validate that address already exists
     const origin = await Farmer.findByPk(id)
     if (!origin) throw new Error(`Entity not found`)
 
-    origin.set(farmer)
+    // Set new values from request
+    origin.set(farmerEntity)
+    const { name, cpf, cnpj } = origin
+    const newFarmer: FarmerEntity = new FarmerEntity({ name, cpf, cnpj  }, id)
 
-    const { cpf, cnpj, name } = origin
-    const newFarmer = new FarmerEntity({ cpf, cnpj, name }, id)
-
-    const validationResult = newFarmer.isValid()
+    // Validate it before save
+    const validationResult = farmerEntity.isValid()
     if (!validationResult.valid)
       throw new Error(
         `Missing required fields: ${validationResult.errors.join()}`,
       )
 
-    return origin.save()
+    await origin.save()
+    return newFarmer
   }
 
   async delete(id: string): Promise<void> {

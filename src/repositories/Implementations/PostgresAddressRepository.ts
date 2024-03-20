@@ -12,25 +12,29 @@ export class PostgresAddressRepository implements IAddressRepository {
         `Missing required fields: ${validationResult.errors.join()}`,
       )
 
-    return await Address.create(address)
+    const {id, city, state} = await Address.create(address)
+    return new AddressEntity({city, state}, id)
   }
 
-  async update(id: string, address: AddressEntity): Promise<AddressEntity> {
+  async update(id: string, addressEntity: AddressEntity): Promise<AddressEntity> {
+    // Validate that address already exists
     const origin = await Address.findByPk(id)
     if (!origin) throw new Error(`Entity not found`)
 
-    origin.set(address)
-
+    // Set new values from request
+    origin.set(addressEntity)
     const { city, state } = origin
     const newAddress: AddressEntity = new AddressEntity({ city, state }, id)
 
-    const validationResult = newAddress.isValid()
+    // Validate it before save
+    const validationResult = addressEntity.isValid()
     if (!validationResult.valid)
       throw new Error(
         `Missing required fields: ${validationResult.errors.join()}`,
       )
 
-    return origin.save()
+    await origin.save()
+    return newAddress
   }
 
   async delete(id: string): Promise<void> {
