@@ -1,10 +1,15 @@
 import { PostgresCropRepository } from "./PostgresCropRepository"
 import { CropEntity } from "../../entities/CropEntity"
 import { uuid } from "uuidv4"
+import { faker } from "@faker-js/faker"
 
 jest.mock("../../models/Crop")
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Crop = require("../../models/Crop")
+
+jest.mock("../../models/Farm")
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Farm = require("../../models/Farm")
 
 const CropAttributeInput = { name: 'sugarcane' }
 describe('PostgresCropRepository', () => {
@@ -15,8 +20,14 @@ describe('PostgresCropRepository', () => {
   it('should successfully insert a valid Crop entity into the database', async () => {
     // Arrange
     const createdCrop = new CropEntity(CropAttributeInput)
+    const cropInstanceMocked = {addFarm: jest.fn(), ...createdCrop}
     const CropRepository: PostgresCropRepository = new PostgresCropRepository();
-    jest.spyOn(Crop, 'create').mockResolvedValue(createdCrop);
+    jest.spyOn(Crop, 'create').mockResolvedValue(cropInstanceMocked as never);
+    jest.spyOn(Crop, 'findOne').mockResolvedValue(null);
+    // jest.spyOn(Crop, 'addFarm').mockResolvedValue(null);
+
+    const farmInstanceMocked = {id: faker.string.uuid(), addCrop: jest.fn()}
+    jest.spyOn(Farm, 'findByPk').mockResolvedValue(farmInstanceMocked as never);
 
     // Act
     const insertedCrop:CropEntity = await CropRepository.insert(createdCrop);
@@ -25,8 +36,13 @@ describe('PostgresCropRepository', () => {
     expect(insertedCrop).toBeInstanceOf(CropEntity);
     expect(insertedCrop.name).toBe(createdCrop.name);
 
+    expect(cropInstanceMocked.addFarm).toHaveBeenCalledTimes(1);
+    expect(Crop.findOne).toHaveBeenCalledTimes(1);
     expect(Crop.create).toHaveBeenCalledTimes(1);
     expect(Crop.create).toHaveBeenCalledWith(createdCrop);
+
+    expect(Farm.findByPk).toHaveBeenCalledTimes(1);
+    expect(farmInstanceMocked.addCrop).toHaveBeenCalledTimes(1);
   });
 
   it('should successfully update an existing Crop entity in the database', async () => {
@@ -60,7 +76,7 @@ describe('PostgresCropRepository', () => {
     expect(Crop.findByPk).toHaveBeenCalledWith(objectId);
 
     expect(currentCropModelInstance.set).toHaveBeenCalledTimes(1);
-    // expect(mockedCropInstance.set).toHaveBeenCalledWith(updatedCrop);
+    expect(currentCropModelInstance.set).toHaveBeenCalledWith(newObjectFields);
 
     expect(currentCropModelInstance.save).toHaveBeenCalledTimes(1);
   });

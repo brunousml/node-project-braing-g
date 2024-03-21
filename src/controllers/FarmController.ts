@@ -22,7 +22,8 @@ const FarmController = {
         },
         {
           model: Crop,
-          as: 'crops'
+          as: 'crops',
+          through: 'farms_crops'
         }]
       },
     );

@@ -5,6 +5,7 @@ export class CropEntity {
   public readonly id: string | undefined
 
   public name: string | undefined
+  public farm_id: string | undefined
 
   constructor(props: Omit<ICropDTO, "id">, id?: string) {
     Object.assign(this, props)

@@ -17,7 +17,7 @@ class Crop extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Farm, {
-      foreignKey: "farm_id",
+      foreignKey: "crop_id",
       through: "farms_crops",
       as: "farms",
     })

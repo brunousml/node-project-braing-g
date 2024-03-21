@@ -4,22 +4,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("farms_crops", {
-      id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
-        allowNull: false,
-      },
       farm_id: {
         type: Sequelize.UUID,
-        allowNull: false,
         references: { model: "farms", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
       crop_id: {
         type: Sequelize.UUID,
-        allowNull: false,
         references: { model: "crops", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
