@@ -11,6 +11,7 @@ import { FarmController } from "./controllers/FarmController"
 import { deleteFarmController } from "./useCases/FarmsUseCases/DeleteFarm"
 import { createFarmController } from "./useCases/FarmsUseCases/CreateFarm"
 import { updateFarmController } from "./useCases/FarmsUseCases/UpdateFarm"
+import { CropController } from "./controllers/CropController"
 
 const router = Router()
 
@@ -52,6 +53,11 @@ router.patch("/farms/:farms_id", (request, response) => {
 })
 router.delete("/farms/:farms_id", (request, response) => {
   return deleteFarmController.handle(request, response)
+})
+
+// Crops routes
+router.get("/crops/", (request, response) => {
+  return CropController.list(request, response)
 })
 
 export { router }

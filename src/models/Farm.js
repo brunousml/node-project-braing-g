@@ -8,18 +8,18 @@ class Farm extends Model {
         name: DataTypes.STRING,
         totalArea: DataTypes.INTEGER,
         arableArea: DataTypes.INTEGER,
-        vegetationArea: DataTypes.INTEGER,
+        vegetationArea: DataTypes.INTEGER
       },
       {
-        sequelize,
-      },
+        sequelize
+      }
     )
   }
 
   static associate(models) {
-    this.belongsTo(models.Farmer, { foreignKey: 'farmer_id', as: 'farmer' })
-    this.belongsTo(models.Address, { foreignKey: 'address_id', as: 'address' })
-    // this.belongsToMany(models.Crop, { foreignKey: 'crop_id', through:'farms_crops', as: 'crops' });
+    this.belongsTo(models.Farmer, { foreignKey: "farmer_id", as: "farmer" })
+    this.belongsTo(models.Address, { foreignKey: "address_id", as: "address" })
+    this.belongsToMany(models.Crop, { foreignKey: "crop_id", through: "farms_crops", as: "crops" })
   }
 }
 
