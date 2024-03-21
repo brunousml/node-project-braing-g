@@ -33,8 +33,8 @@ const addressSeeds = (amount)=> {
   for (let i = 0; i < amount; i++) {
     seed.push({
       id:faker.string.uuid(),
-      city: faker.person.fullName(),
-      state: faker.person.fullName(),
+      city: faker.location.city(),
+      state: faker.location.state(),
       created_at: new Date(),
       updated_at: new Date()
     })
@@ -49,7 +49,7 @@ const farmSeeds = (amount, farmerId, addressId)=> {
   for (let i = 0; i < amount; i++) {
     seed.push({
       id:faker.string.uuid(),
-      name: faker.person.fullName(),
+      name: faker.company.name() + " farm",
       farmer_id: farmerId,
       address_id: addressId,
       total_area: 100,

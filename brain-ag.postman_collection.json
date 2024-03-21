@@ -125,6 +125,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/farmers/0ec42c8c-ec4e-468a-9619-11256eaa1ca4/dashboard",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmers",
+								"0ec42c8c-ec4e-468a-9619-11256eaa1ca4",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -260,7 +281,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"piracicaba\",\n    \"totalArea\": 100,\n    \"vegetationArea\": 10,\n    \"arableArea\": 90\n}",
+							"raw": "{\n    \"name\": \"piracicaba\",\n    \"totalArea\": 100,\n    \"vegetationArea\": 5,\n    \"arableArea\": 90\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -341,6 +362,128 @@
 				},
 				{
 					"name": "farms",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/farms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crops",
+			"item": [
+				{
+					"name": "crops",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"sugarcane\",\n    \"farm_id\": \"612fd0df-6f89-44b7-a0bd-111e0afebfe1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/crops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"crops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "farms",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"city\": \"Campinas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/addresses/e97d9f0e-e121-49e5-9773-5c3d4559819b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"addresses",
+								"e97d9f0e-e121-49e5-9773-5c3d4559819b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crops",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Scala\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/crops/a2b107bc-dff8-4173-bac0-8503395271af",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"crops",
+								"a2b107bc-dff8-4173-bac0-8503395271af"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crops",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
