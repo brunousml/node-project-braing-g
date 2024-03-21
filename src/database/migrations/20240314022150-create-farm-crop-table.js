@@ -10,10 +10,10 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      farmer_id: {
+      farm_id: {
         type: Sequelize.UUID,
         allowNull: false,
-        references: { model: "farmers", key: "id" },
+        references: { model: "farms", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
