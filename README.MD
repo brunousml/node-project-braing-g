@@ -12,6 +12,13 @@ docker compose up
 yarn install
 ```
 
+# Create database
+```shell
+yarn sequelize db:create
+yarn sequelize db:migrate
+yarn sequelize db:seed:all
+```
+
 ## Development mode
 ```shell
 yarn start:dev

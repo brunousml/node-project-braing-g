@@ -4,6 +4,7 @@ const dbConfig = {
   username: "user",
   password: "pass",
   database: "brain",
+  seederStorage: 'sequelize',
   define: {
     timestamps: true,
     underscored: true,
