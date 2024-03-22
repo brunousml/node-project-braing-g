@@ -2,11 +2,20 @@
 
 API for manage farm dataset using node, express, typescript, and solid principles. 
 
+# Run Application using Docker
+You need to have installed Docker before it. You will find instructions [here](https://docs.docker.com/engine/install/).
+```shell
+docker compose up
+```
+
+# API Docs
+For api documentation you can access the following endpoint: http://localhost:3000/api-docs/ after when the server is running.
+
 # Manual Installation
 
 ```shell
 # Expose a postgres using docker 
-docker compose up
+docker compose up postgres
 
 # Install project dependencies
 yarn install
@@ -14,9 +23,7 @@ yarn install
 
 # Create database
 ```shell
-yarn sequelize db:create
-yarn sequelize db:migrate
-yarn sequelize db:seed:all
+yarn db:start
 ```
 
 ## Development mode
@@ -29,6 +36,3 @@ yarn start:dev
 yarn build
 yarn start
 ```
-
-# API Docs
-For api documentation you can access the following endpoint: http://localhost:3000/api-docs/ after when the server is running.
