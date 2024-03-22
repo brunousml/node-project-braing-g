@@ -10,7 +10,11 @@
     "prettier:fix": "yarn prettier --write 'src/**'",
     "test": "jest --passWithNoTests",
     "test:watch": "yarn test --watch",
-    "test:push": "yarn test --coverage"
+    "test:push": "yarn test --coverage",
+    "db:create": " yarn sequelize db:create || true",
+    "db:migrate": "yarn sequelize db:migrate",
+    "db:seeds": "yarn sequelize db:seed:all",
+    "db:start": "yarn db:create && yarn db:migrate && yarn db:seeds"
   },
   "license": "MIT",
   "devDependencies": {

@@ -2,7 +2,7 @@
 
 API for manage farm dataset using node, express, typescript, and solid principles. 
 
-# Installation
+# Manual Installation
 
 ```shell
 # Expose a postgres using docker 
