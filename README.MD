@@ -29,3 +29,6 @@ yarn start:dev
 yarn build
 yarn start
 ```
+
+# API Docs
+For api documentation you can access the following endpoint: http://localhost:3000/api-docs/ after when the server is running.

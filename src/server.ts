@@ -1,5 +1,6 @@
 import express from "express"
 import { router } from "./routes"
+import { setupSwagger } from "./swagger"
 
 const app = express()
 
@@ -7,6 +8,9 @@ require("./database") // enable sequelize to server
 
 app.use(express.json())
 app.use(router)
+
+// Setup Swagger
+setupSwagger(app);
 
 const port = process.env.PORT || 3000
 
