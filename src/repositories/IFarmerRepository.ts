@@ -4,4 +4,5 @@ export interface IFarmerRepository {
   insert(farmer: FarmerEntity): Promise<FarmerEntity>
   update(id: string, farmer: FarmerEntity): Promise<FarmerEntity>
   delete(id: string): Promise<void>
+  dashboard(id: string): Promise<object>
 }

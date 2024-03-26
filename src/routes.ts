@@ -15,12 +15,14 @@ import { CropController } from "./controllers/CropController"
 import { deleteCropController } from "./useCases/CropsUseCases/DeleteCrop"
 import { createCropController } from "./useCases/CropsUseCases/CreateCrop"
 import { updateCropController } from "./useCases/CropsUseCases/UpdateCrop"
-import { DashboardController } from "./controllers/DashboardController"
+import { dashboardFarmerController } from "./useCases/FarmersUseCases/DashboardFarmer"
 
 const router = Router()
 
 // Farmers routes
-router.get("/farmers/:farmer_id/dashboard", DashboardController.list)
+router.get("/farmers/:farmer_id/dashboard", (request, response) => {
+  return dashboardFarmerController.handle(request, response)
+})
 
 /**
  * @swagger

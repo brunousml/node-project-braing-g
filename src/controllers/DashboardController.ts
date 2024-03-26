@@ -36,7 +36,15 @@ const DashboardController = {
         }
       ]
     });
+
     if(!farmer) response.status(404).send()
+    if(!farmer.farms) response.send({
+      total: 0,
+      hectares: 0,
+      byState: {},
+      byCrop: {},
+      byVegetationAndArabelArea: {},
+    })
 
     const hectares = farmer.farms.reduce((total: number, farm: { totalArea: number}) => total + farm.totalArea, 0);
     const byState = farmer.farms.reduce((totalByState: {[state: string]: number }, farm: {address: {state: string}, totalArea: number}) => {

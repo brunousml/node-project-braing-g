@@ -113,4 +113,74 @@ describe('PostgresFarmerRepository', () => {
       // Act & Assert
       await expect(FarmerRepository.insert(invalidFarmer)).rejects.toThrowError(expectedErrorMessage);
     });
+
+  describe('dashboard', () => {
+    it('should return an object with total farms, hectares, byState, byCrop, and byVegetationAndArabelArea when given a valid farmer id with farms', async () => {
+      // Arrange
+      const farmerId = 'validFarmerId';
+      const farmer = {
+        farms: [
+          {
+            name: 'farm1',
+            totalArea: 100,
+            vegetationArea: 50,
+            arableArea: 50,
+            address: {
+              state: 'state1'
+            },
+            crops: [
+              { name: 'crop1' },
+              { name: 'crop2' }
+            ]
+          },
+          {
+            name: 'farm2',
+            totalArea: 200,
+            vegetationArea: 50,
+            arableArea: 50,
+            address: {
+              state: 'state2'
+            },
+            crops: [
+              { name: 'crop1' },
+              { name: 'crop3' }
+            ]
+          }
+        ]
+      };
+      const FarmerRepository = new PostgresFarmerRepository();
+      jest.spyOn(Farmer, 'findByPk').mockResolvedValue(farmer);
+
+      // Act
+      const result = await FarmerRepository.dashboard(farmerId);
+
+      // Assert
+      expect(result).toEqual({
+        total: 2,
+        hectares: 300,
+        byState: {
+          state1: 100,
+          state2: 200
+        },
+        byCrop: {
+          crop1: 300,
+          crop2: 100,
+          crop3: 200
+        },
+        byVegetationAndArabelArea: {
+          'farm1': {
+            vegetationArea: 50,
+            arabelArea: 50
+          },
+          'farm2': {
+            vegetationArea: 50,
+            arabelArea: 50
+          }
+        }
+      });
+      expect(Farmer.findByPk).toHaveBeenCalledTimes(1);
+      expect(Farmer.findByPk).toHaveBeenCalledWith(farmerId, expect.any(Object));
+    });
+  })
+
 });
